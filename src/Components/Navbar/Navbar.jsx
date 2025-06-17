@@ -34,10 +34,14 @@ import '../Navbar/Navbar.css';
 import logo from '../Assests/logo.png';
 import cart_icon from '../Assests/cart_icon.png';
 import { Link, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { ShopContext } from '../../Context/ShopContext.jsx';
+
 
 const Navbar = () => {
   const location = useLocation(); // Get the current path
   const currentPath = location.pathname;
+  const {getTotalCartItems} = useContext(ShopContext);
 
   return (
     <div className="navbar">
@@ -66,7 +70,7 @@ const Navbar = () => {
       <div className="nav-login-cart">
         <Link to="/login"><button>Login</button></Link>
         <Link to="/cart"><img src={cart_icon} alt="cart_icon" /></Link>
-        <div className="nav-cart-count">0</div>
+        <div className="nav-cart-count">{getTotalCartItems()}</div>
       </div>
     </div>
   );
